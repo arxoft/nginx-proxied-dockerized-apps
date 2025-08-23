@@ -67,6 +67,8 @@ Here's an example `docker-compose.prod.yml` of an app:
         environment:
         - VIRTUAL_HOST=bmsapi.maktg.com
         - VIRTUAL_PORT=7200
+        - LETSENCRYPT_HOST=bmsapi.maktg.com
+        - LETSENCRYPT_EMAIL=your-email@example.com
     mongo:
         restart: always
     networks:
