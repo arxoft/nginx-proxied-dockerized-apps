@@ -28,7 +28,7 @@ services:
     depends_on:
       - nginx-proxy
     environment:
-      - DEFAULT_EMAIL=your-email@example.com   # <-- change this
+      - DEFAULT_EMAIL=asif@arxoft.com
     networks:
       - proxy-net
 
