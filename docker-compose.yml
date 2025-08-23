@@ -28,6 +28,7 @@ services:
     depends_on:
       - nginx-proxy
     environment:
+      - NGINX_PROXY_CONTAINER=nginx-proxy
       - DEFAULT_EMAIL=asif@arxoft.com
     networks:
       - proxy-net
