@@ -27,6 +27,18 @@ if [ ! -f "$APP_DIR/docker-compose.prod.yml" ]; then
   exit 1
 fi
 
+# Ask if rebuild is needed
+echo "Do you want to rebuild the containers? (y/N): "
+read -r REBUILD_RESPONSE
+
+REBUILD_FLAG=""
+if [[ "$REBUILD_RESPONSE" =~ ^[Yy]$ ]]; then
+  REBUILD_FLAG="--build"
+  echo "Will rebuild containers..."
+else
+  echo "Using existing images..."
+fi
+
 # Stop and remove existing containers for this app
 echo "Stopping container named: $APP_NAME..."
 CONTAINERS=$(docker ps -aq --filter "name=${APP_NAME}")
@@ -39,6 +51,11 @@ fi
 COMPOSE_CMD="docker-compose -f $APP_DIR/docker-compose.yml -f $APP_DIR/docker-compose.prod.yml"
 
 # Run the app
-echo "Starting $APP_NAME with: $COMPOSE_CMD up -d"
-$COMPOSE_CMD up -d
+if [ -n "$REBUILD_FLAG" ]; then
+  echo "Starting $APP_NAME with rebuild: $COMPOSE_CMD up -d --build"
+  $COMPOSE_CMD up -d --build
+else
+  echo "Starting $APP_NAME: $COMPOSE_CMD up -d"
+  $COMPOSE_CMD up -d
+fi
 

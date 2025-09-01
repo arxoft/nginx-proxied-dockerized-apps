@@ -1,1 +1,18 @@
+# Kiro IDE files (keep steering files, ignore the rest)
+.kiro/settings/
+.kiro/cache/
+.kiro/logs/
+.kiro/specs/*/tasks.md
 
+# Docker volumes and certificates
+certs/
+vhost.d/
+html/
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.swp
+*~
